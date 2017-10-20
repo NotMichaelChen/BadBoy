@@ -1,5 +1,7 @@
 #include "cpu_math.h"
 
+#include <stdbool.h>
+
 #include "cpu_internal.h"
 #include "memory.h"
 #include "bitmanip.h"
@@ -202,8 +204,25 @@ void math_misc(unsigned char instr, struct reg_type *reg) {
 
     switch(op) {
     //Decimal Adjust A (DAA)
+    //Pseudocode from http://gbdev.gg8.se/wiki/articles/Main_Page
     case 0b00:
+        if(get_flag('N', reg)) {
+            if(get_flag('C', reg))
+                *(reg->A) -= 0x60;
+            if(get_flag('H', reg))
+                *(reg->A) -= 0x06;
+        }
+        else {
+            if (get_flag('C', reg) || (*(reg->A) & 0xFF) > 0x99) {
+                *(reg->A) += 0x60;
+                set_flag('C', reg);
+            }
+            if (get_flag('H', reg) || (*(reg->A) & 0x0F) > 0x09)
+                *(reg->A) += 0x06;
+        }
 
+        set_flag_Z(*(reg->A), reg);
+        reset_flag('H', reg);
     //Complement A (CPL)
     case 0b01:
         *(reg->A) = ~(*(reg->A));

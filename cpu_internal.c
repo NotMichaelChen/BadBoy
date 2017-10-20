@@ -118,6 +118,26 @@ bool get_flag(char flag, struct reg_type *reg) {
     return false;
 }
 
+void set_flag(char flag, struct reg_type *reg) {
+    flag = toupper(flag);
+
+    switch(flag) {
+    case 'Z':
+        *(reg->F) |= (1 << 7);
+        break;
+    case 'N':
+        *(reg->F) |= (1 << 6);
+        break;
+    case 'H':
+        *(reg->F) |= (1 << 5);
+        break;
+    case 'C':
+        *(reg->F) |= (1 << 4);
+        break;
+    //TODO: add some error if flag is invalid
+    }
+}
+
 //For convenience
 void reset_flag(char flag, struct reg_type *reg) {
     flag = toupper(flag);
