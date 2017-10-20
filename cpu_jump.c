@@ -88,7 +88,7 @@ void jump_jp(unsigned char instr, struct reg_type *reg) {
     //Get address from (HL) instead
     //TODO: Does not follow standard jp pattern, resolve
     if(instr == 0xE9) {
-        address = reg->HL;
+        address = *(reg->HL);
     }
     else {
         address = (readRAM(reg->PC+2) << 8) + readRAM(reg->PC+1);

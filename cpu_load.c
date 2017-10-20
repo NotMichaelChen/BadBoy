@@ -128,7 +128,7 @@ void load_sp(unsigned char instr, struct reg_type *reg) {
     //Load SP into HL plus an extra byte
     case 0xF8: {
         char val = (char)readRAM(reg->PC+1);
-        reg->HL = reg->SP + val;
+        *(reg->HL) = reg->SP + val;
 
         reset_flag('Z', reg);
         reset_flag('N', reg);
@@ -141,7 +141,7 @@ void load_sp(unsigned char instr, struct reg_type *reg) {
     }
     //Load HL into SP
     case 0xF9:
-        reg->SP = reg->HL;
+        reg->SP = *(reg->HL);
 
         reg->PC += 1;
         break;
