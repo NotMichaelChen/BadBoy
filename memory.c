@@ -5,24 +5,24 @@
 #include <stdlib.h>
 
 //0000-7FFF
-unsigned char *cart;
+static unsigned char *cart;
 //8000-9FFF
-unsigned char *vram;
+static unsigned char *vram;
 //A000-BFFF
-unsigned char *cartram;
+static unsigned char *cartram;
 //C000-DFFF
-unsigned char *ram;
+static unsigned char *ram;
 //E000-FDFF
-unsigned char *ramecho;
+static unsigned char *ramecho;
 //FE00-FE9F
-unsigned char *OAM;
+static unsigned char *OAM;
 //FEA0-FEFF, unusable
 //FF00-FF7F
-unsigned char *IOports;
+static unsigned char *IOports;
 //FF80-FFFE
-unsigned char *internram;
+static unsigned char *internram;
 //FFFF
-unsigned char interrupt;
+static unsigned char interrupt;
 
 //Must be called before any other functions are used
 void alloc_ram() {
