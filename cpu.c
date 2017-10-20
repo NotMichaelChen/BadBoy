@@ -1,5 +1,7 @@
 #include "cpu.h"
 
+#include <stdlib.h>
+
 #include "memory.h"
 #include "bitmanip.h"
 
@@ -57,22 +59,7 @@ void parse_instr(unsigned char instr, struct reg_type *reg) {
 
 struct reg_type init_mem() {
     //Create the registers struct and initialize the values
-    struct reg_type registers;
-    registers.AF = 0x01B0;
-    //These casts work since casting is higher precedence than addition
-    registers.A = (unsigned char *)&registers.AF;
-    registers.F = (unsigned char *)&registers.AF+1;
-    registers.BC = 0x0013;
-    registers.B = (unsigned char *)&registers.BC;
-    registers.C = (unsigned char *)&registers.BC+1;
-    registers.DE = 0x00D8;
-    registers.D = (unsigned char *)&registers.DE;
-    registers.E = (unsigned char *)&registers.DE+1;
-    registers.HL = 0x014D;
-    registers.H = (unsigned char *)&registers.HL;
-    registers.L = (unsigned char *)&registers.HL+1;
-    registers.SP = 0xFFFE;
-    registers.PC = 0x100;
+    struct reg_type registers = new_reg();
 
     //initialize the I/O registers
     writeRAM(0xFF05, 0x00);

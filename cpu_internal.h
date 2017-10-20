@@ -2,11 +2,11 @@
 #define CPU_INTERNAL_H
 
 struct reg_type {
-    //Actual memory values
-    unsigned short AF;
-    unsigned short BC;
-    unsigned short DE;
-    unsigned short HL;
+    //Actual memory values allocated on the heap
+    unsigned short *AF;
+    unsigned short *BC;
+    unsigned short *DE;
+    unsigned short *HL;
     //Pointers to individual bytes
     unsigned char *A;
     unsigned char *F;
@@ -22,6 +22,9 @@ struct reg_type {
     //Program Counter
     unsigned short PC;
 };
+
+struct reg_type new_reg();
+void dealloc_reg(struct reg_type *registers);
 
 //Flag setting
 void set_flag_Z(int result, struct reg_type *reg);
