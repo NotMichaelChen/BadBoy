@@ -2,6 +2,7 @@
 
 #include <ctype.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #include "memory.h"
 #include "bitmanip.h"
@@ -49,9 +50,9 @@ void dealloc_reg(struct reg_type *registers)
 //function
 void set_flag_Z(int result, struct reg_type *reg) {
     if(!result)
-        *(reg->F) |= 0b10000000;
+        *(reg->F) |= (1 << 7);
     else
-        *(reg->F) &= 0b01111111;
+        *(reg->F) &= ~(1 << 7);
 }
 
 /* Contrary to GBCPUman.pdf, the H/C flag is set on borrow.
@@ -71,9 +72,9 @@ void set_flag_H(int a, int b, struct reg_type *reg, int is_sub) {
     result = is_sub ? !result : result;
 
     if(result)
-        *(reg->F) |= 0b100000;
+        *(reg->F) |= (1 << 5);
     else
-        *(reg->F) &= 0b11011111;
+        *(reg->F) &= ~(1 << 5);
 }
 
 //Set the carry flag
@@ -85,14 +86,36 @@ void set_flag_C(int a, int b, struct reg_type *reg, int is_sub) {
     result = is_sub ? !result : result;
 
     if(result)
-        *(reg->F) |= 0b10000;
+        *(reg->F) |= (1 << 4);
     else
-        *(reg->F) &= 0b11101111;
+        *(reg->F) &= ~(1 << 4);
 }
 
 //For convenience
 void set_flag_N(struct reg_type *reg) {
-    *(reg->F) |= 0b1000000;
+    *(reg->F) |= (1 << 6);
+}
+
+bool get_flag(char flag, struct reg_type *reg) {
+    flag = toupper(flag);
+
+    switch(flag) {
+    case 'Z':
+        return *(reg->F) & (1 << 7);
+        break;
+    case 'N':
+        return *(reg->F) & (1 << 6);
+        break;
+    case 'H':
+        return *(reg->F) & (1 << 5);
+        break;
+    case 'C':
+        return *(reg->F) & (1 << 4);
+        break;
+    //TODO: add some error if flag is invalid
+    }
+
+    return false;
 }
 
 //For convenience
@@ -101,16 +124,16 @@ void reset_flag(char flag, struct reg_type *reg) {
 
     switch(flag) {
     case 'Z':
-        *(reg->F) &= 0b01111111;
+        *(reg->F) &= ~(1 << 7);
         break;
     case 'N':
-        *(reg->F) &= 0b10111111;
+        *(reg->F) &= ~(1 << 6);
         break;
     case 'H':
-        *(reg->F) &= 0b11011111;
+        *(reg->F) &= ~(1 << 5);
         break;
     case 'C':
-        *(reg->F) &= 0b11101111;
+        *(reg->F) &= ~(1 << 4);
         break;
     //TODO: add some error if flag is invalid
     }

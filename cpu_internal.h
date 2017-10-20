@@ -1,6 +1,8 @@
 #ifndef CPU_INTERNAL_H
 #define CPU_INTERNAL_H
 
+#include <stdbool.h>
+
 struct reg_type {
     //Actual memory values allocated on the heap
     unsigned short *AF;
@@ -31,6 +33,7 @@ void set_flag_Z(int result, struct reg_type *reg);
 void set_flag_H(int a, int b, struct reg_type *reg, int negate);
 void set_flag_C(int a, int b, struct reg_type *reg, int negate);
 void set_flag_N(struct reg_type *reg);
+bool get_flag(char flag, struct reg_type *reg);
 void reset_flag(char flag, struct reg_type *reg);
 
 //Register Decoding
