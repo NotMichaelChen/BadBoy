@@ -247,3 +247,53 @@ void math_misc(unsigned char instr, struct reg_type *reg) {
 
     reg->PC += 1;
 }
+
+// 16-Bit Arithmetic
+
+//Increment or decrement the given 16-bit register
+//0b00xx x011
+void math_double_incdec(unsigned char instr, struct reg_type *reg) {
+    unsigned char srcnum = get_bits(instr, 2, 3);
+    unsigned short *srcptr = decode_two_bit(srcnum, reg);
+
+    //0 = inc, 1 = dec
+    char crementer = 1 - 2 * get_bits(instr, 4, 4);
+
+    //No flags affected
+
+    *srcptr += crementer;
+
+    reg->PC += 1;
+}
+
+//Add the given 16-bit register to HL
+//0b00xx 1001
+void math_double_add(unsigned char instr, struct reg_type *reg) {
+    unsigned char srcnum = get_bits(instr, 2, 3);
+    unsigned short *srcptr = decode_two_bit(srcnum, reg);
+
+    //Set flags before assigning the final result
+    reset_flag('N', reg);
+    set_flag_H(*(reg->HL), *srcptr, reg, 0);
+    set_flag_C(*(reg->HL), *srcptr, reg, 0);
+
+    *(reg->HL) += *srcptr;
+
+    reg->PC += 1;
+}
+
+//Add the immediate byte to the Stack Pointer
+//0b1110 1000
+void math_addSP(unsigned char instr, struct reg_type *reg) {
+    unsigned char val = readRAM(reg->PC+1);
+
+    //Set flags before assigning the final result
+    reset_flag('Z', reg);
+    reset_flag('N', reg);
+    set_flag_H(reg->SP, val, reg, 0);
+    set_flag_C(reg->SP, val, reg, 0);
+
+    reg->SP += val;
+
+    reg->PC += 2;
+}
