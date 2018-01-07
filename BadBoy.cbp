@@ -58,6 +58,10 @@
 		<Unit filename="src/cpu_misc.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="src/cpu_prefix.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/cpu_prefix.h" />
 		<Unit filename="src/main.c">
 			<Option compilerVar="CC" />
 		</Unit>
