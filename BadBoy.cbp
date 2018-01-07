@@ -31,40 +31,40 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="bitmanip.c">
+		<Unit filename="src/bitmanip.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="bitmanip.h" />
-		<Unit filename="cpu.c">
+		<Unit filename="src/bitmanip.h" />
+		<Unit filename="src/cpu.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="cpu.h" />
-		<Unit filename="cpu_internal.c">
+		<Unit filename="src/cpu.h" />
+		<Unit filename="src/cpu_internal.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="cpu_internal.h" />
-		<Unit filename="cpu_jump.c">
+		<Unit filename="src/cpu_internal.h" />
+		<Unit filename="src/cpu_jump.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="cpu_jump.h" />
-		<Unit filename="cpu_load.c">
+		<Unit filename="src/cpu_jump.h" />
+		<Unit filename="src/cpu_load.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="cpu_load.h" />
-		<Unit filename="cpu_math.c">
+		<Unit filename="src/cpu_load.h" />
+		<Unit filename="src/cpu_math.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="cpu_math.h" />
-		<Unit filename="cpu_misc.c">
+		<Unit filename="src/cpu_math.h" />
+		<Unit filename="src/cpu_misc.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="main.c">
+		<Unit filename="src/main.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="memory.c">
+		<Unit filename="src/memory.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="memory.h" />
+		<Unit filename="src/memory.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
