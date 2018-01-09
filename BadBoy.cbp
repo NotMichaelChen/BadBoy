@@ -62,6 +62,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src/cpu_prefix.h" />
+		<Unit filename="src/cpu_rotate.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/cpu_rotate.h" />
 		<Unit filename="src/main.c">
 			<Option compilerVar="CC" />
 		</Unit>
